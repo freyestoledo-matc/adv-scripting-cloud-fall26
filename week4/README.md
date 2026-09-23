@@ -1,0 +1,1 @@
+Script to create an ec2 instance and terminate it later using the lastest Linux Ami image of AWS 
