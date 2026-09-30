@@ -83,10 +83,10 @@ def main():
 
     print("Instance is running and details are updated.")
 
-    instance.terminate()
-    instance.wait_until_terminated()  # Wait until the instance is terminated
+    ###instance.terminate()
+    ###instance.wait_until_terminated()  # Wait until the instance is terminated
 
-    print(f"EC2 instance with ID {instance.id} has been terminated.")
+    ###print(f"EC2 instance with ID {instance.id} has been terminated.")
 
 
 if __name__ == "__main__":
