@@ -32,7 +32,21 @@ def create_ec2(image_id, ec2_client):  # Function to create an EC2 instance
         InstanceType='t3.micro',
         MinCount=1,
         MaxCount=1,
-        DryRun=DRYRUN # Set to False to actually create the instance
+        DryRun=DRYRUN, # Set to False to actually create the instance
+        SecurityGroups=['WebSG'],
+        KeyName='vockey',
+        UserData='''
+            #!/bin/bash -ex 
+            # Updated to use Amazon Linux 2 
+            yum -y update 
+            yum -y install httpd php mysql php-mysql wget unzip 
+            /usr/bin/systemctl enable httpd 
+            /usr/bin/systemctl start httpd 
+            cd /var/www/html 
+            wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/CUR-TF-100-ACCLFO-2/lab6-scaling/lab-app.zip 
+            unzip lab-app.zip -d /var/www/html/ 
+            chown apache:root /var/www/html/rds.conf.php 
+        '''
     )
 
     #print(response['Instances'][0]['InstanceId'])
