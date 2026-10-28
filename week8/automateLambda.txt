@@ -1,0 +1,27 @@
+Week 8 – Automate Lambda
+______________________________
+
+1. Method used to create a new Lambda function
+______________________________
+
+The Boto3 method is create_function() from the AWS Lambda client.
+______________________________
+
+2. Required parameters
+______________________________
+
+The required parameters for create_function() are:
+
+    FunctionName – The name of the Lambda function.
+    Runtime – The programming language runtime, such as python3.12.
+    Role – The Amazon Resource Name (ARN) of the IAM execution role.
+    Handler – The name of the file and function that Lambda runs, such as lambda_function.lambda_handler.
+    Code – The deployment package containing the Lambda function code.
+
+______________________________
+
+3. Two ways to specify the Python code
+______________________________
+
+    ZipFile – Provide the deployment package as a ZIP file in bytes using the ZipFile parameter inside the Code dictionary.
+    S3Bucket and S3Key – Specify the S3 bucket and object key where the ZIP deployment package containing the Python code is stored.
