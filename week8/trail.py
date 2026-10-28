@@ -95,6 +95,11 @@ def main():
     if s3enforce.CreateBucket(bucket_name) is None:
         sys.exit(1)
 
+    # Enable versioning on the log bucket.
+    if s3enforce.EnforceVersioning(bucket_name) is None:
+        print("Failed to enable bucket versioning.")
+        sys.exit(1)
+
     # Bucket policy that allows CloudTrail to write logs to the bucket.
     policy = {
         "Version": "2012-10-17",
@@ -129,13 +134,16 @@ def main():
 
     # Apply the bucket policy so CloudTrail can write logs.
     if s3enforce.SetBucketPolicy(bucket_name, policy_string) is None:
+        print("Failed to apply the bucket policy.")
         sys.exit(1)
 
     # Create the trail and start logging to the bucket.
-    trail_name = "week8-cloudtrail"
+    trail_name = "CloudTrail"
     if CreateTrail(trail_name, bucket_name) is None:
+        print("Failed to create the CloudTrail.")
         sys.exit(1)
-
+    
+    print("CloudTrail setup completed successfully.")
     return account_id
 
 
