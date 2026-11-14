@@ -1,0 +1,21 @@
+Other Security Monitoring
+
+1. Monitor S3 Bucket Public Access
+
+I would monitor S3 buckets to ensure they are not publicly accessible and that sensitive data is protected.
+I would use the Boto3 S3 client with the get_public_access_block() and get_bucket_policy_status() functions. 
+I would examine the PublicAccessBlockConfiguration and IsPublic elements of the response object to detect buckets that allow public access and ensure that all public access restrictions are enabled.
+
+2. Monitor EC2 Security Groups
+
+I would monitor EC2 security groups to identify unrestricted inbound network traffic that could expose instances to unauthorized access.
+I would use the Boto3 EC2 client with the describe_security_groups() function.
+I would examine the SecurityGroups, IpPermissions, IpRanges, CidrIp, FromPort, and ToPort elements of the response object.
+This would help detect security groups that allow inbound access from 0.0.0.0/0, especially on sensitive ports such as SSH (22) and RDP (3389).
+
+3. Monitor IAM Access Keys
+
+I would monitor IAM access keys to identify potentially compromised, inactive, or outdated keys.
+I would use the Boto3 IAM client with the list_access_keys() and get_access_key_last_used() functions. 
+I would examine the AccessKeyMetadata, Status, CreateDate, AccessKeyLastUsed, LastUsedDate, ServiceName, and Region elements of the response object.
+This would help identify unused or outdated access keys and investigate suspicious activity to reduce the risk of unauthorized access.
